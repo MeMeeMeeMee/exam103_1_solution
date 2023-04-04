@@ -1,5 +1,6 @@
 package main;
 
+import exam.base.Loggable;
 import exam.base.OrgUnit;
 import exam.unit.Department;
 import exam.unit.School;
@@ -12,10 +13,10 @@ public class MainOrgTest {
         // ข้อ 3
         // test method ทุกตัวที่อยู่ใน class แม่ แล้วก็ไปใน class ลูก
 
-        //testSchool();
-        //testDepartment();
+        testSchool();
+        testDepartment();
         testSchoolAsOrgUnit();
-        //testDepartmentAsLoggable();
+        testDepartmentAsLoggable();
     }
 
     // ข้อ 3.1
@@ -123,6 +124,32 @@ public class MainOrgTest {
 
     // ข้อ 3.4
     private static void testDepartmentAsLoggable(){ //tests that Department objects work correctly as Loggable
+
+        School school = new School(1, "KMUTT");
+        Department department = new Department(1, "KMUTT", school);
+
+        //test method ที่อยู่ใน class แม่ หมดแล้ว----------------------------------------------
+
+        System.out.println("getCode :"  + department.getCode());
+        System.out.println("getName :"  + department.getName());
+        department.setName("SIT");
+        System.out.println("After setName :"  + department.getName());
+        System.out.println("getLog :"  + department.getLog());
+        department.clearLog();
+        System.out.println("After clearLog :"  + department.getLog());
+
+        //test method ที่อยู่ใน class ลูก หมดแล้ว----------------------------------------------
+        System.out.println("getSchool :"  + department.getSchool().getName());
+        School newSchool = new School(200, "Bangmod School");
+        department.setSchool(newSchool);
+        System.out.println("After setSchool getSchool :"  + department.getSchool().getName());
+        System.out.println("After setSchool getLog :"  + department.getLog());
+
+        Loggable loggable = department;
+
+        System.out.println("getLog : "  + loggable.getLog());
+        loggable.clearLog();
+        System.out.println("After clearLog getLog : "  + loggable.getLog());
 
 
     }
