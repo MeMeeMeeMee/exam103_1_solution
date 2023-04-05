@@ -1,19 +1,25 @@
 package exam.base;
 
-public class Group {
+//ข้อ 5 -----------------------------------------------------------------
+public class Group<T> {
+    // ข้อ 5
+    //เปลี่ยนเป็น Generic
+    //cash
+    //แก้ code ให้ถูก
 
-    private final Object[] objects;
+
+    private final T[] objects;
     private int size;
 
     public Group(int capacity) {
-        objects = new Object[size < 2 ? 2 : size];
+        objects = (T[]) new Object[capacity < 2 ? 2 : capacity];
     }
 
     public int getSize() {
         return size;
     }
 
-    public boolean append(Object o) {
+    public boolean append(T o) {
         if (o == null || size == objects.length) {
             return false;
         }
@@ -26,7 +32,7 @@ public class Group {
         return true;
     }
 
-    public int find(Object o) {
+    public int find(T o) {
         for (int i = 0; i < size; i++) {
             if (objects[i] == o) {
                 return i;
@@ -35,7 +41,7 @@ public class Group {
         return -1;
     }
 
-    public boolean remove(Object o) {
+    public boolean remove(T o) {
         int x = find(o);
         if (x == -1) {
             return false;
@@ -48,7 +54,7 @@ public class Group {
         return true;
     }
 
-    public Object get(int i) {
+    public T get(int i) {
         if (i > -1 && i < size) {
             return objects[i];
         }

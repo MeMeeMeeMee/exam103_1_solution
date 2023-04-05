@@ -98,7 +98,7 @@ public class MainOrgTest {
     Staff objects work correctly on its constructor and both getter and setter 
     for affiliation attribute.
     */
-    static void testStaff() {
+    public static void testStaff() {
         System.out.println("\nTest Staff ...");
         Staff s = new Staff(100, "Adam", "Family", new School(1, "SIT"));
         System.out.format("Staff: id[%d] firsname[%s] lastname[%s] affiliation[%s]%n",

@@ -1,9 +1,12 @@
 package main;
 
+import exam.base.Group;
 import exam.base.Loggable;
 import exam.base.OrgUnit;
 import exam.unit.Department;
 import exam.unit.School;
+import exam.unit.Staff;
+
 
 public class MainOrgTest {
     public static void main(String[] args) {
@@ -13,11 +16,75 @@ public class MainOrgTest {
         // ข้อ 3
         // test method ทุกตัวที่อยู่ใน class แม่ แล้วก็ไปใน class ลูก
 
-        testSchool();
-        testDepartment();
-        testSchoolAsOrgUnit();
-        testDepartmentAsLoggable();
+//        testSchool();
+//        testDepartment();
+//        testSchoolAsOrgUnit();
+//        testDepartmentAsLoggable();
+//        testStaff();
+          testDepartmentGroup();
+
     }
+ // ข้อ 6
+    private static void testDepartmentGroup() {
+        //สร้าง object ของ DepartmentGroup ที่มี capacity เป็น 10
+        Group<Department> departmentGroup = new Group<>(4);
+        Department department1 = new Department(1,"IT",new School(1,"KMUTT"));
+        Department department2 = new Department(2,"CS",new School(1,"KMUTT"));
+        Department department3 = new Department(3,"IS",new School(1,"KMUTT"));
+        Department department4 = new Department(4,"SE",new School(1,"KMUTT"));
+        Department department5 = new Department(5,"EE",new School(1,"KMUTT"));
+        Department department6 = new Department(6,"ME",new School(1,"KMUTT"));
+        System.out.println("Append department1:" + departmentGroup.append(department1));
+        System.out.println("Append department1:" + departmentGroup.append(department1));
+        System.out.println("Append department2:" + departmentGroup.append(department2));
+        System.out.println("Append department3:" + departmentGroup.append(department3));
+        System.out.println("Append department4:" + departmentGroup.append(department4));
+        System.out.println("Append department5:" + departmentGroup.append(department5));
+
+        System.out.println("find(department3) : " + departmentGroup.find(department3));
+        System.out.println("find(department6) : " + departmentGroup.find(department6));
+
+        System.out.println("remove(department6) : " + departmentGroup.remove(department6));
+        System.out.println("get(3):" + departmentGroup.get(3).getName());
+        System.out.println("get(10):" + departmentGroup.get(10));
+
+        for (int i=0; i<departmentGroup.getSize(); i++){
+            Department department = departmentGroup.get(i);
+            System.out.printf("(%d) %s - %s",department.getCode(),department.getName(),department.getSchool().getName());
+
+        }
+
+
+
+
+    }
+
+    //ข้อ 4.2
+    private static void testStaff() {
+        //สร้าง object ของ Staff ที่มี affiliation เป็น School
+        Staff staff = new Staff(1,"Meen","Kongkam",
+                new School(1,"KMUTT"));
+
+    //test ทุกตัว
+        //getId
+        System.out.println("getId :"  + staff.getId());
+        staff.setId(100);
+        System.out.println("After setId getId :"  + staff.getId());
+        //getFirstname
+        System.out.println("getFirstname :"  + staff.getFirstname());
+        staff.setFirstname("Tester");
+        System.out.println("After setFirstname getFirstname :"  + staff.getFirstname());
+        //getLastname
+        System.out.println("getLastname :"  + staff.getLastname());
+        staff.setLastname("Jing Jing");
+        System.out.println("After setLastname getLastname :"  + staff.getLastname());
+        //getAffiliation
+        System.out.println("getAffiliation :"  + staff.getAffiliation().getClass().getSimpleName());
+        staff.setAffiliation(new Department(100,"IT",new School(2,"Bangna Shcool")));
+        System.out.println("After setAffiliation getAffiliation :"  + staff.getAffiliation().getClass().getSimpleName());
+    }
+
+
 
     // ข้อ 3.1
     private static void testSchool(){ //tests that School objects work correctly as School.
